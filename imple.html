@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>RIPIM BY E.U.KIM</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript
+      ><link rel="stylesheet" href="assets/css/noscript.css"
+    /></noscript>
+    <style>
+      .array {
+          display: inline-block;
+          margin: 30px;
+      }
+      input {
+          width: 60px;
+      }
+      .label {
+            font-size: 12px;
+            color: gray;
+        }
+        .array-container {
+            display: flex;
+            flex-direction: row;
+        }
+        .selected-array {
+            display: flex;
+            flex-direction: row;
+        }
+  </style>
+   
+
+  </head>
+  <body class="is-preload">
+    <!-- Wrapper -->
+    <div id="wrapper">
+      <!-- Header -->
+      <header id="header">
+        <a href="index.html" class="logo">RIPIM</a>
+      </header>
+
+      <!-- Nav -->
+      <nav id="nav">
+        <ul class="links">
+          <li><a href="index.html">소개 | Introducion</a></li>
+          <li><a href="rosua.html">개념 | RIP</a></li>
+          <li><a href="algo.html">알고리즘 | Algo</a></li>
+          <li class="active"><a href="imple.html">구현 | Implementation</a></li>
+        </ul>
+        
+      </nav>
+      
+
+      <!-- Main -->
+      <div id="main">
+        <!-- Post -->
+        <h2>구현하기</h2>
+
+        <body>
+          <label for="arrayCount">만들고 싶은 배열의 개수를 입력하세요:
+          <input type="number" id="arrayCount" min="1">
+          <button onclick="createArrays()">배열 생성</button></label>
+          
+          <div id="arrayContainer"></div>
+          
+          <label for="selectArray">배열 선택 (A, B, C, ...):
+          <input type="text" id="selectArray">
+          <button onclick="showSelectedArray()">배열 보기</button></label>
+          
+          <div id="selectedArray" class="array-container"></div>
+          
+          <script>
+              const arrays = []; // Store arrays
+              
+              function createArrays() {
+                  const arrayCount = parseInt(document.getElementById("arrayCount").value);
+                  const arrayContainer = document.getElementById("arrayContainer");
+                  arrayContainer.innerHTML = ""; // Clear previous content
+                  
+                  for (let i = 0; i < arrayCount; i++) {
+                      const arrayDiv = document.createElement("div");
+                      arrayDiv.className = "array";
+                      
+                      const arrayLabel = document.createElement("label");
+                      arrayLabel.textContent = `${String.fromCharCode(65 + i)}배열`;
+                      arrayDiv.appendChild(arrayLabel);
+                      
+                      const array = [];
+                      for (let j = 0; j < arrayCount; j++) {
+                          const input = document.createElement("input");
+                          input.type = "number";
+                          if (i === j) {
+                              input.value = `${String.fromCharCode(65 + i)}`;
+                              input.disabled = true;
+                          } else {
+                              input.placeholder = `${String.fromCharCode(65 + j)}`;
+                          }
+                          array.push(input);
+                          arrayDiv.appendChild(input);
+                      }
+                      
+                      arrays.push(array);
+                      arrayContainer.appendChild(arrayDiv);
+                  }
+              }
+              
+              function showSelectedArray() {
+                  const selectArrayInput = document.getElementById("selectArray");
+                  const selectedArrayDiv = document.getElementById("selectedArray");
+                  const selectedArrayName = selectArrayInput.value.toUpperCase();
+                  
+                  selectedArrayDiv.innerHTML = ""; // Clear previous content
+                  
+                  for (let i = 0; i < arrays.length; i++) {
+                      if (String.fromCharCode(65 + i) === selectedArrayName) {
+                          const selectedArray = arrays[i];
+                          for (let j = 0; j < selectedArray.length; j++) {
+                              const input = document.createElement("input");
+                              input.type = "text";
+                              input.value = selectedArray[j].value;
+                              selectedArrayDiv.appendChild(input);
+                          }
+                          break;
+                      }
+                  }
+              }
+          </script>
+      </body>
+          
+        </section>
+      </div>
+
+      <!-- Footer -->
+      <footer id="footer">
+        
+            </ul>
+          </section>
+        </section>
+      </footer>
+
+       <!-- Copyright -->
+	   <div id="copyright">
+        <ul>
+          <li>comedu</li>
+          <li>RIPIM</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
